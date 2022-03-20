@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environment</title>
+    <style>
+        *{
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Install apache2:</h1>
+    <ol>
+        <li>sudo apt update</li>
+        <li>sudo apt install apache2</li>
+    </ol>
+    <h1>Config firewall:</h1>
+    <ol>
+        <li>sudo ufw app list</li>
+        <li>sudo uf2 allow "Apache Full"</li>
+    </ol>
+    <h1>Install MySQL:</h1>
+    <ol>
+        <li>sudo apt install mysql-server</li>
+        <li>sudo mysql_secure_installation</li>
+    </ol>
+    <h1>Install PHP:</h1>
+    <ol>
+        <li>sudo apt install php libapache2-mod-php</li>
+        <li>sudo apt install php-mysql php-curl php-mbstring php-gd php-zip ...</li>
+    </ol>
+    <h1>VirtualHost:</h1>
+    <ol>
+        <li>sudo mkdir /var/www/arca/</li>
+        <li>sudo chown -R $USER:$USER /var/www/arca</li>
+        <li>sudo chmod -R 755 /var/www/arca</li>
+        <li>touch /var/www/arca/index.php</li>
+        <li>echo "&lt;?php echo 'Hello world'; ?&gt;" > /var/www/arca/index.php></li>
+        <li>
+            touch /etc/apache2/site-available/arca.conf:
+<pre style="color: crimson;">
+    &lt;VirtualHost *:80&gt;
+        ServerAdmin admin@arca.net
+
+        ServerName arca.net
+        ServerAlias www.arca.net
+
+        DocumentRoot /var/www/arca
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+</pre>
+        </li>
+        <li>sudo a2ensite arca.conf</li>
+        <li>sudo echo "127.0.0.1 arca.net" >> /etc/hosts</li>
+        <li>sudo systemctl restart apache2</li>
+    </ol>
+</body>
+</html>
