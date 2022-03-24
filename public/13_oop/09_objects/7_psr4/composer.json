@@ -1,0 +1,7 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Dir1\\": "src/Dir1"
+        }
+    }
+}
